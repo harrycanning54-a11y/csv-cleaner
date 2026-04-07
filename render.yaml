@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: csv-cleaner
+    env: python
+    buildCommand: ""
+    startCommand: python app.py

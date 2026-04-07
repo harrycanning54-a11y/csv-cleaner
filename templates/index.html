@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Cleaner</title>
+    <meta name="google-site-verification" content="l540npG9nJ_KaCA23q0zJFBlgl-q36HOV2ouaw46-1w" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-badge">Simple CSV cleaning tool</div>
+
+        <h1>CSV Cleaner</h1>
+        <p class="page-subtitle">Upload your CSV, choose your cleaning options, and download a cleaned version in seconds.</p>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="csv_file" class="drop-zone" id="drop-zone">
+                <span class="drop-zone-title">Drag and drop your CSV here</span>
+                <span class="drop-zone-subtext">or click to choose a file</span>
+                <input type="file" id="csv_file" name="csv_file" accept=".csv" required hidden>
+            </label>
+
+            <p id="file-name" class="muted"></p>
+
+            <div class="stats-box">
+                <h2>Cleaning Options</h2>
+                <p class="muted">Choose which cleanup steps to apply to your file.</p>
+
+                <div class="option-list">
+                    <label>
+                        <input type="checkbox" name="remove_duplicates" checked>
+                        Remove duplicate rows
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="remove_empty_rows" checked>
+                        Remove completely empty rows
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="trim_spaces" checked>
+                        Trim spaces from text
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="standardize_columns" checked>
+                        Standardize column names
+                    </label>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <button type="submit">Clean My CSV</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("csv_file");
+        const dropZone = document.getElementById("drop-zone");
+        const fileName = document.getElementById("file-name");
+
+        fileInput.addEventListener("change", function () {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = "Selected file: " + fileInput.files[0].name;
+            }
+        });
+
+        dropZone.addEventListener("dragover", function (e) {
+            e.preventDefault();
+            dropZone.classList.add("dragover");
+        });
+
+        dropZone.addEventListener("dragleave", function () {
+            dropZone.classList.remove("dragover");
+        });
+
+        dropZone.addEventListener("drop", function (e) {
+            e.preventDefault();
+            dropZone.classList.remove("dragover");
+
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                fileName.textContent = "Selected file: " + e.dataTransfer.files[0].name;
+            }
+        });
+    </script>
+</body>
+</html>

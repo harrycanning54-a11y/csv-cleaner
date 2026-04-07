@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cleaning Results</title>
+    <meta name="google-site-verification" content="l540npG9nJ_KaCA23q0zJFBlgl-q36HOV2ouaw46-1w" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-badge">Results</div>
+
+        <h1>Cleaning Complete</h1>
+        <p class="page-subtitle">Your file has been processed. Review the summary below, preview the cleaned data, and download the output.</p>
+
+        <div class="section-grid">
+            <div class="stats-box">
+                <h2>Before Cleaning</h2>
+                <p class="stat-line"><span class="stat-label">Rows:</span> {{ rows_before }}</p>
+                <p class="stat-line"><span class="stat-label">Columns:</span> {{ columns_before }}</p>
+            </div>
+
+            <div class="stats-box">
+                <h2>After Cleaning</h2>
+                <p class="stat-line"><span class="stat-label">Rows:</span> {{ rows_after }}</p>
+                <p class="stat-line"><span class="stat-label">Columns:</span> {{ columns_after }}</p>
+            </div>
+
+            <div class="stats-box">
+                <h2>Changes Applied</h2>
+                <p class="stat-line"><span class="stat-label">Duplicate rows removed:</span> {{ duplicates_removed }}</p>
+                <p class="stat-line"><span class="stat-label">Empty rows removed:</span> {{ empty_rows_removed }}</p>
+                <p class="stat-line"><span class="stat-label">Spaces trimmed from text:</span> {{ spaces_trimmed }}</p>
+                <p class="stat-line"><span class="stat-label">Column names standardized:</span> {{ columns_standardized }}</p>
+            </div>
+
+            <div class="stats-box">
+                <h2>Preview of Cleaned CSV</h2>
+                {{ preview_table|safe }}
+            </div>
+        </div>
+
+        <div class="card-actions">
+            <a href="/download">
+                <button>Download Cleaned File</button>
+            </a>
+
+            <a href="/" class="link">Upload another file</a>
+        </div>
+    </div>
+</body>
+</html>

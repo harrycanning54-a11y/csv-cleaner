@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-badge">Error</div>
+
+        <h1>Something went wrong</h1>
+        <p class="page-subtitle">
+            We couldn't process your file. Please make sure it's a valid CSV.
+        </p>
+
+        <div class="stats-box">
+            <p class="muted">
+                Possible issues:
+            </p>
+            <ul>
+                <li>File is not a CSV</li>
+                <li>File is empty</li>
+                <li>File format is broken</li>
+            </ul>
+        </div>
+
+        <div class="card-actions">
+            <a href="/">
+                <button>Try Again</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
